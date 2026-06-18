@@ -1,0 +1,9 @@
+summary: Top products leaderboard
+description: 'Fan-out branch of orders_clean: best-selling products by revenue.'
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties: {}
+  required: []

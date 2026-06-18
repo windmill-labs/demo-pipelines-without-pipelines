@@ -1,0 +1,11 @@
+summary: Fetch FX rates (scheduled)
+description: >-
+  Scheduled source: refreshes datatable://main/fx_rates every 6 hours.
+  Independent from order uploads — daily_revenue joins both sources.
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties: {}
+  required: []

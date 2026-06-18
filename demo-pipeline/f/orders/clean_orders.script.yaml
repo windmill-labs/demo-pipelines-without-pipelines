@@ -1,0 +1,11 @@
+summary: Clean & dedup orders
+description: >-
+  Triggered by every write to orders_raw. Keeps the latest row per order_id,
+  drops invalid quantities/prices, and types the columns.
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties: {}
+  required: []

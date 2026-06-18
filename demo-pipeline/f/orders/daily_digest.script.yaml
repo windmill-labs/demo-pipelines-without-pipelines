@@ -1,0 +1,18 @@
+summary: Daily digest (AND-join of both exports)
+description: >-
+  Join barrier showcase: `// trigger all` makes this script wait until BOTH
+  the revenue and the products export for the same day have landed, then it
+  runs exactly once and upserts datatable://main/daily_digest. A single
+  export shows as JoinPending (1/2) in Activity.
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties:
+    partition:
+      type: string
+      description: >-
+        Injected by the cascade when the join fires (the day both exports
+        landed for). Set explicitly only to re-run a specific day.
+  required: []

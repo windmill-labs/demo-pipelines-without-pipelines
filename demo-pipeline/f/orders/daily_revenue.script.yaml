@@ -1,0 +1,11 @@
+summary: Daily revenue in USD
+description: >-
+  Fan-in step: subscribed to both orders_clean and fx_rates, converts every
+  order to USD with the latest FX snapshot and aggregates per day.
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties: {}
+  required: []

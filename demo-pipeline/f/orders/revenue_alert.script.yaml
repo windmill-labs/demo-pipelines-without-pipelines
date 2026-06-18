@@ -1,0 +1,15 @@
+summary: Revenue alert
+description: >-
+  Terminal consumer of daily_revenue — flags days above a revenue threshold.
+  No output asset: pure side effect (imagine a Slack ping).
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties:
+    threshold_usd:
+      type: number
+      description: Flag days with USD revenue at or above this value
+      default: 1000
+  required: []

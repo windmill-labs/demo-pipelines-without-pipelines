@@ -1,0 +1,16 @@
+summary: Ingest orders (upload & run)
+description: 'UI-first entry point of the pipeline: upload an order export and run.
+  Writes the raw rows to datatable://main/orders_raw, which fans out to the whole
+  downstream pipeline.'
+lock: ''
+kind: script
+schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  properties:
+    orders_file:
+      type: object
+      format: resource-s3_object
+      description: Order export file (JSON array) — uploaded to workspace storage
+  required:
+  - orders_file

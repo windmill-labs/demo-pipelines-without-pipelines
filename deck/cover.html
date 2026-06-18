@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+    background: radial-gradient(120% 130% at 78% 18%, #1e3a8a 0%, #0b1220 55%, #05080f 100%);
+    color: #f8fafc;
+    position: relative;
+  }
+  /* subtle grid */
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(120% 100% at 70% 30%, #000 30%, transparent 85%);
+  }
+  .wrap { position: absolute; inset: 0; display: flex; padding: 72px 80px; }
+  .left { width: 560px; display: flex; flex-direction: column; justify-content: center; z-index: 3; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 17px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: #93c5fd; margin-bottom: 26px;
+  }
+  .eyebrow .dot { width: 9px; height: 9px; border-radius: 50%; background: #3B82F6; box-shadow: 0 0 14px #3B82F6; }
+  h1 { font-size: 72px; line-height: 1.02; font-weight: 800; letter-spacing: -.025em; }
+  h1 .em { color: #60a5fa; }
+  .sub { margin-top: 28px; font-size: 23px; line-height: 1.45; color: #cbd5e1; max-width: 500px; font-weight: 400; }
+  .sub code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 20px; color: #93c5fd; background: rgba(59,130,246,.12); padding: 1px 7px; border-radius: 6px; }
+  .brand { margin-top: 40px; font-size: 19px; font-weight: 700; color: #e2e8f0; display: flex; align-items: center; gap: 11px; }
+  .brand .mark { width: 26px; height: 26px; border-radius: 7px; background: linear-gradient(135deg,#3B82F6,#60a5fa); display:flex; align-items:center; justify-content:center; font-size:16px; }
+
+  /* graph */
+  .graph { position: absolute; right: 54px; top: 0; bottom: 0; width: 560px; z-index: 2; }
+  svg { width: 100%; height: 100%; overflow: visible; }
+  .node { fill: #0f1b30; stroke: #2c4a73; stroke-width: 1.5; }
+  .asset { fill: #0d2233; stroke: #1f6feb; stroke-width: 1.5; }
+  .lbl { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 14px; fill: #cbd5e1; }
+  .lbl.a { fill: #7cc4ff; }
+  .ic { font-size: 15px; }
+  .edge { fill: none; stroke: #3a597f; stroke-width: 2; }
+  .edge.w { stroke: #3B82F6; }
+  .edge.dash { stroke: #5b7characters; }
+  .glow { filter: drop-shadow(0 0 6px rgba(59,130,246,.55)); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span> Windmill Engineering</div>
+      <h1>Pipelines<br/>without<br/><span class="em">pipelines</span></h1>
+      <div class="sub">The data&#8209;pipeline graph nobody wrote — it <b>emerges</b> from what each script reads&nbsp;&amp;&nbsp;writes.</div>
+      <div class="brand"><span class="mark">◳</span> windmill.dev</div>
+    </div>
+  </div>
+
+  <div class="graph">
+    <svg viewBox="0 0 560 630">
+      <!-- edges -->
+      <!-- trigger -> producer -->
+      <path class="edge" d="M150,95 L150,150" />
+      <!-- producer -> orders(asset) -->
+      <path class="edge w glow" d="M150,205 L150,260" />
+      <!-- orders -> consumer A -->
+      <path class="edge" d="M150,315 C150,345 80,345 80,375" />
+      <!-- orders -> consumer B -->
+      <path class="edge" d="M150,315 C150,345 300,345 300,375" />
+      <!-- consumerA -> report(asset) -->
+      <path class="edge w glow" d="M80,430 L80,485" />
+      <!-- consumerB -> metrics(asset) -->
+      <path class="edge w glow" d="M300,430 L300,485" />
+      <!-- report + metrics -> dashboard -->
+      <path class="edge" d="M80,540 C80,565 200,565 200,565" />
+      <path class="edge" d="M300,540 C300,565 200,565 200,565" />
+
+      <!-- trigger -->
+      <g transform="translate(110,55)">
+        <rect class="node" width="80" height="40" rx="9" />
+        <text class="ic" x="14" y="25">⏱</text>
+        <text class="lbl" x="32" y="25">schedule</text>
+      </g>
+
+      <!-- producer -->
+      <g transform="translate(95,150)">
+        <rect class="node" width="110" height="55" rx="10" />
+        <text class="ic" x="16" y="33">🟦</text>
+        <text class="lbl" x="36" y="27">load_orders</text>
+        <text class="lbl" x="36" y="44" style="fill:#64748b">.sql</text>
+      </g>
+
+      <!-- asset: orders -->
+      <g transform="translate(92,260)">
+        <rect class="asset" width="116" height="55" rx="27.5" />
+        <text class="ic" x="16" y="33">▦</text>
+        <text class="lbl a" x="36" y="32">orders</text>
+      </g>
+
+      <!-- consumer A -->
+      <g transform="translate(25,375)">
+        <rect class="node" width="110" height="55" rx="10" />
+        <text class="ic" x="14" y="33">🟦</text>
+        <text class="lbl" x="34" y="27">clean</text>
+        <text class="lbl" x="34" y="44" style="fill:#64748b">.py</text>
+      </g>
+
+      <!-- consumer B -->
+      <g transform="translate(245,375)">
+        <rect class="node" width="110" height="55" rx="10" />
+        <text class="ic" x="14" y="33">🟦</text>
+        <text class="lbl" x="34" y="27">aggregate</text>
+        <text class="lbl" x="34" y="44" style="fill:#64748b">.ts</text>
+      </g>
+
+      <!-- asset: report -->
+      <g transform="translate(22,485)">
+        <rect class="asset" width="116" height="55" rx="27.5" />
+        <text class="ic" x="14" y="33">▦</text>
+        <text class="lbl a" x="34" y="32">report</text>
+      </g>
+
+      <!-- asset: metrics -->
+      <g transform="translate(242,485)">
+        <rect class="asset" width="116" height="55" rx="27.5" />
+        <text class="ic" x="14" y="33">▦</text>
+        <text class="lbl a" x="34" y="32">metrics</text>
+      </g>
+
+      <!-- dashboard (join) -->
+      <g transform="translate(145,538)">
+        <rect class="node" width="110" height="55" rx="10" />
+        <text class="ic" x="14" y="33">🟦</text>
+        <text class="lbl" x="34" y="32">dashboard</text>
+      </g>
+    </svg>
+  </div>
+</body>
+</html>

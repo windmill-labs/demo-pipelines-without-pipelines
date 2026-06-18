@@ -1,0 +1,17 @@
+summary: Export top products snapshot (partitioned)
+description: >-
+  Partitioned export branch: snapshots top_products to
+  s3:///exports/{partition}/products.json. One of the two inputs the
+  daily_digest AND-join waits on.
+lock: ''
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties:
+    partition:
+      type: string
+      description: >-
+        Resolved automatically by the pipeline (daily). Set explicitly only
+        to backfill a specific day.
+  required: []
