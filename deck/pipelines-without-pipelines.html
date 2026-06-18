@@ -185,10 +185,9 @@ The parser is the bridge that lets one artifact be both <strong>executable</stro
 <p>The unlock: <strong>one parser, native + WASM</strong>, so the script definitions are<br />
 simultaneously what <strong>runs</strong> and what you <strong>see</strong>.</p>
 <blockquote>
-<p>Zero drift by construction, not by discipline.</p>
+<p><img class="emoji" draggable="false" alt="🚀" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/1f680.svg" data-marp-twemoji=""/> <strong>We're hiring</strong> — Rust / TypeScript / systems engineers → <strong>windmill.dev/careers</strong></p>
 </blockquote>
-<p><em>Code:</em> <code>windmill-queue/src/asset_dispatch.rs</code> · <code>parsers/windmill-parser-*-asset</code> · <code>frontend/.../AssetGraph</code><br />
-<em>Branch:</em> <code>feat/asset-graph-view</code> — blog post incoming.</p>
+<p><em>Code:</em> <code>windmill-queue/src/asset_dispatch.rs</code> · <code>parsers/windmill-parser-*-asset</code> · <code>frontend/.../AssetGraph</code> — all on <code>main</code>.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-class="lead" data-theme="default" lang="en-US" class="lead" data-marpit-pagination="15" style="--paginate:true;--class:lead;--theme:default;" data-marpit-pagination-total="25">
 <h1 id="appendix-a--the-real-code">Appendix A — The real code</h1>
@@ -517,13 +516,10 @@ produces the authoritative asset rows at deploy. Through wasm-pack, the exact
 same crate becomes a WASM module — parse_assets_sql, parse_assets_ts,
 parse_assets_py — that the Svelte editor calls on every change.
 
-One codebase. Two runtimes. Zero drift — by construction, not by discipline. The
-graph the editor draws is computed by literally the same instructions that will
-decide what runs in production. The backend even re-parses at deploy so server
-stays authoritative if the browser is lying or outdated.&quot;
-
-This is the line for the blog title card: &quot;Zero drift by construction, not by
-discipline.&quot;</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>[11:30–12:15] (45s)
+One codebase. Two runtimes. No drift between them. The graph the editor draws is
+computed by literally the same instructions that will decide what runs in
+production. The backend even re-parses at deploy so server stays authoritative if
+the browser is lying or outdated.&quot;</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>[11:30–12:15] (45s)
 
 Tie the three threads together. Don't introduce anything new.
 
@@ -594,8 +590,9 @@ What makes the second one honest rather than magical is a single parser we
 refused to write twice. Native in the backend, WASM in the browser, so your
 scripts are at once the program and the picture.
 
-Zero drift by construction, not by discipline. That's the talk — happy to go
-deep on the dispatch internals or the parser in Q&amp;A. Blog post is coming.&quot;
+That's the talk. And we're hiring — Rust, TypeScript, and systems folks; come
+talk to me or hit windmill.dev/careers. Happy to go deep on the dispatch
+internals or the parser in Q&amp;A.&quot;
 
 Thanks + Q&amp;A. Likely questions: cycles? (cycle detection breaks them), exactly-once?
 (dispatch is at-least-once-ish, idempotency on you), why not Temporal? (this is the

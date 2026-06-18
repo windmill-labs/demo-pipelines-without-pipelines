@@ -507,13 +507,10 @@ produces the authoritative asset rows at deploy. Through wasm-pack, the exact
 same crate becomes a WASM module — parse_assets_sql, parse_assets_ts,
 parse_assets_py — that the Svelte editor calls on every change.
 
-One codebase. Two runtimes. Zero drift — by construction, not by discipline. The
-graph the editor draws is computed by literally the same instructions that will
-decide what runs in production. The backend even re-parses at deploy so server
-stays authoritative if the browser is lying or outdated."
-
-This is the line for the blog title card: "Zero drift by construction, not by
-discipline."
+One codebase. Two runtimes. No drift between them. The graph the editor draws is
+computed by literally the same instructions that will decide what runs in
+production. The backend even re-parses at deploy so server stays authoritative if
+the browser is lying or outdated."
 -->
 
 ---
@@ -635,10 +632,9 @@ This slide is what turns 'cute idea' into 'I'd trust this in prod' for engineers
 The unlock: **one parser, native + WASM**, so the script definitions are
 simultaneously what **runs** and what you **see**.
 
-> Zero drift by construction, not by discipline.
+> 🚀 **We're hiring** — Rust / TypeScript / systems engineers → **windmill.dev/careers**
 
-*Code:* `windmill-queue/src/asset_dispatch.rs` · `parsers/windmill-parser-*-asset` · `frontend/.../AssetGraph`
-*Branch:* `feat/asset-graph-view` — blog post incoming.
+*Code:* `windmill-queue/src/asset_dispatch.rs` · `parsers/windmill-parser-*-asset` · `frontend/.../AssetGraph` — all on `main`.
 
 <!--
 [14:30–15:00] (30s)
@@ -653,8 +649,9 @@ What makes the second one honest rather than magical is a single parser we
 refused to write twice. Native in the backend, WASM in the browser, so your
 scripts are at once the program and the picture.
 
-Zero drift by construction, not by discipline. That's the talk — happy to go
-deep on the dispatch internals or the parser in Q&A. Blog post is coming."
+That's the talk. And we're hiring — Rust, TypeScript, and systems folks; come
+talk to me or hit windmill.dev/careers. Happy to go deep on the dispatch
+internals or the parser in Q&A."
 
 Thanks + Q&A. Likely questions: cycles? (cycle detection breaks them), exactly-once?
 (dispatch is at-least-once-ish, idempotency on you), why not Temporal? (this is the

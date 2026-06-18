@@ -71,8 +71,8 @@ Then open the pipeline view (folder **f/orders**) and run a source script to wat
 the cascade. Edit a script locally and `wmill sync push` again — the graph updates
 from the code, with nothing else to maintain.
 
-> **Requirements:** a Windmill instance on a build that includes the data-pipelines /
-> asset-graph feature. The pipeline references workspace **data tables** and **S3
+> **Requirements:** a recent Windmill release (the data-pipelines / asset-graph
+> feature is on `main`). The pipeline references workspace **data tables** and **S3
 > object storage** — configure those in your workspace (the scripts create the tables
 > they need on first run).
 
@@ -88,8 +88,15 @@ reads and writes, reconstructed on demand by a `SELECT`. Execution is dispatch, 
 orchestration: when a script writes an asset, every subscriber fires. The keystone is
 a single asset parser compiled twice — native Rust in the backend (authoritative
 dispatch at deploy) and WebAssembly in the editor (the live graph as you type) — so
-the script definitions are at once the program and the picture. Zero drift, by
-construction.
+the script definitions are at once the program and the picture — no separate graph
+to keep in sync.
+
+---
+
+## We're hiring 🚀
+
+Windmill is hiring **Rust**, **TypeScript**, and **systems** engineers to build exactly
+this kind of thing. → **[windmill.dev/careers](https://www.windmill.dev/careers)**
 
 ---
 
