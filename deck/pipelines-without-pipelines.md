@@ -269,6 +269,9 @@ Pause after "no definition." This is the thesis slide.
 
 ## Data pipelines: there is no pipeline
 
+Flows are **compute-centric** — you orchestrate *runs*. Data pipelines are
+**asset-centric** — you declare *data*, and the runs follow.
+
 No `PipelineValue`. No DAG file. No orchestrator.
 
 Just scripts that declare what they **touch**:
@@ -634,8 +637,9 @@ This slide is what turns 'cute idea' into 'I'd trust this in prod' for engineers
 
 ## Takeaways
 
-**Flows** → explicit FSM. You write the graph; a generic interpreter walks it.
-**Pipelines** → emergent graph. You write scripts; the graph *falls out* of them.
+**Flows** → compute-centric, explicit FSM. A modern **Airflow**.
+**Pipelines** → asset-centric, emergent graph. A modern **dbt / Dagster**.
+Both on Windmill: **faster, more powerful, polyglot** (TS · Python · Go · SQL · …).
 
 The unlock: **one parser, native + WASM**, so the script definitions are
 simultaneously what **runs** and what you **see**.
@@ -649,9 +653,13 @@ simultaneously what **runs** and what you **see**.
 
 Close clean and quotable.
 
-"Two engines under one roof. Flows, when you want to author a graph explicitly —
-the right tool when the shape is the point. Pipelines, when the graph is just a
-consequence of your data dependencies and writing it twice is busywork.
+"Two engines under one roof, two abstractions. Flows are compute-centric — you
+orchestrate runs; think a modern Airflow. Data pipelines are asset-centric — you
+declare data and the runs follow; think a modern dbt or Dagster. And both, on
+Windmill, are faster, more powerful, and polyglot — the same step can be
+TypeScript, Python, Go, or SQL. Flows when the shape is the point; pipelines when
+the graph is just a consequence of your data dependencies and writing it twice is
+busywork.
 
 What makes the second one honest rather than magical is a single parser we
 refused to write twice. Native in the backend, WASM in the browser, so your
