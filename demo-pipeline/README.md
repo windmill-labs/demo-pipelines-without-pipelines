@@ -77,6 +77,16 @@ deploy time; there is no separate pipeline definition file.
   (`wmill.datatable("main")` calls, `ATTACH 'datatable://main'` + `pg.<table>`
   references, `wmill.loadS3File`, …).
 
+## Sample input
+
+[`sample-data/orders.json`](sample-data/orders.json) is the order-export file the
+pipeline expects — a JSON array matching `ingest_orders`'s schema (`order_id`,
+`product`, `category`, `qty`, `unit_price`, `currency`, `ordered_at`). Upload it in
+the **Data upload** run form to drive the whole cascade. It spans three days and all
+four FX currencies (USD/EUR/GBP/JPY), and deliberately includes one duplicate
+`order_id` (dedup keeps the latest) and one zero-qty junk row (dropped by
+`clean_orders`), so the cleaning layer visibly does something.
+
 ## Demo flow
 
 ```bash
