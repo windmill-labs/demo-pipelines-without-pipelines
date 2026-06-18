@@ -113,8 +113,9 @@ A pipeline has <strong>none.</strong> It's a chain reaction:</p>
 <ul>
 <li><strong>Backend</strong>, at deploy → must be <strong>authoritative</strong> (it drives real job dispatch)</li>
 <li><strong>Frontend</strong>, as you type → must be <strong>instant</strong> (live graph in the editor)</li>
+<li><strong>Testing a draft</strong> → there are no asset rows yet, so the <strong>frontend orchestrates the dev-run</strong> — it's <em>authoritative</em> too, before anything is deployed</li>
 </ul>
-<p>Two implementations = two sources of truth = drift = bugs.</p>
+<p>Two implementations = two sources of truth = drift = your <strong>test ≠ prod</strong>.</p>
 <p><strong>So we don't have two implementations.</strong></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-theme="default" lang="en-US" data-marpit-pagination="9" style="--paginate:true;--theme:default;" data-marpit-pagination-total="25">
@@ -478,10 +479,17 @@ which jobs fire. Get it wrong and the wrong things run.
 The frontend needs it instantly, on every keystroke — because the pitch is you
 watch the graph grow as you type.
 
+And here's the kicker: when you *test* a draft pipeline — dev-run it before
+deploying — there are no asset rows on the backend yet, nothing for the dispatcher
+to cascade off. So the FRONTEND orchestrates that test run, off its own parse. It's
+not just drawing the graph, it's executing it. Which means if the two parsers
+disagreed, your test run wouldn't match production. Test ≠ prod is the worst kind
+of bug.
+
 The naive move is two parsers: a real one in Rust, a 'good enough' one in JS for
 the editor. That's two sources of truth. They WILL drift. Your editor will draw
-an edge that doesn't fire, or miss one that does. That's a credibility-killing
-bug for a tool like this.&quot;
+an edge that doesn't fire, or miss one that does — or worse, your test passes and
+prod doesn't. Credibility-killing for a tool like this.&quot;
 
 Beat. Then: &quot;So we didn't do that — because we'd already built it.&quot;</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>[9:55–10:40] (45s)
 

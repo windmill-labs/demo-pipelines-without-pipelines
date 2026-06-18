@@ -406,8 +406,9 @@ Both halves need to agree on "what does this script read/write":
 
 - **Backend**, at deploy → must be **authoritative** (it drives real job dispatch)
 - **Frontend**, as you type → must be **instant** (live graph in the editor)
+- **Testing a draft** → there are no asset rows yet, so the **frontend orchestrates the dev-run** — it's *authoritative* too, before anything is deployed
 
-Two implementations = two sources of truth = drift = bugs.
+Two implementations = two sources of truth = drift = your **test ≠ prod**.
 
 **So we don't have two implementations.**
 
@@ -426,10 +427,17 @@ which jobs fire. Get it wrong and the wrong things run.
 The frontend needs it instantly, on every keystroke — because the pitch is you
 watch the graph grow as you type.
 
+And here's the kicker: when you *test* a draft pipeline — dev-run it before
+deploying — there are no asset rows on the backend yet, nothing for the dispatcher
+to cascade off. So the FRONTEND orchestrates that test run, off its own parse. It's
+not just drawing the graph, it's executing it. Which means if the two parsers
+disagreed, your test run wouldn't match production. Test ≠ prod is the worst kind
+of bug.
+
 The naive move is two parsers: a real one in Rust, a 'good enough' one in JS for
 the editor. That's two sources of truth. They WILL drift. Your editor will draw
-an edge that doesn't fire, or miss one that does. That's a credibility-killing
-bug for a tool like this."
+an edge that doesn't fire, or miss one that does — or worse, your test passes and
+prod doesn't. Credibility-killing for a tool like this."
 
 Beat. Then: "So we didn't do that — because we'd already built it."
 -->
